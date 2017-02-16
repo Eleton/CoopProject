@@ -160,10 +160,15 @@
 	}
 	
 	.infoPop{
+		max-width: 1em;
+		max-height: 1em;
+		display: inline;
+		background-color: beige;
+		position: absolute;
 	}
 	
 	.infoBox{
-		position: absolute;
+		display: inline;
 	}
 
 	#cheapProducts{
@@ -191,9 +196,10 @@
 		<h3>Ekopanelen</h3>
 		<canvas id="myChart" max-width="200px" height="200px"></canvas>
 		<hr>
-		<div class="infoPop" onmouseover="infoPopup(this, 'chart')" onmouseout="infoPopdown(this)">
-			<div class="infoBox">
-			</div>
+		<div class="infoPop" onmouseover="infoPopup(this, 'chart')" onmouseout="infoPopdown(this)">  
+			(i)
+		</div>
+		<div class="infoBox">  
 		</div>
 		<hr>
 		<div id="cheapProducts">
@@ -226,23 +232,6 @@
 			
 			
 		
-			<!--<article>
-				<img src="https://res.cloudinary.com/coopsverige/image/upload/b_white,fl_progressive,q_90,c_lpad,g_center,h_222,w_222/v1480604477/177727.jpg">
-				<h4 class="productname">ÄGG 12-PACK KRAV</h4>
-				<h3 class="price">39:95</h3>
-				<div class="amountOfGoods">
-					<input type="number" value="1"></input>
-					<button type="button">Köp</button>
-				</div>
-				<div class="ecoAlternative">
-					<div>
-						<span>Köp eko!</span>
-						<br>
-						<span>Lägg till <span class="marginalPrice">3 kr</span></span>
-					</div>
-					<div><button type="button">Byt</button></div>
-				</div>
-			</article>-->
 		</div>
 	</div>
 
@@ -250,7 +239,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="jquery.canvasjs.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>-->
 	<script type="text/javascript" src="data.js"></script>
 	<script type="text/javascript">
 	window.onload = function () {
@@ -340,10 +328,10 @@
 		
 		// För infopopups
 		function infoPopup(target, ref) {
-			target.children.innerHTML = "Infotext " + ref + " not found!";
+			target.innerHTML = "Infotext " + ref + " not found!";
 		}
 		function infoPopdown(target) {
-			target.children.innerHTML = "i";
+			target.innerHTML = "(i)";
 		}
 		
 	</script>
