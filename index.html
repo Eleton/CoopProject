@@ -1,0 +1,319 @@
+<html>
+<head>
+	<title>Coop med Ekopanelen</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+	body{
+		background-color: #c1e090;
+		font-family: Akkurat, 'Helvetica Neue';
+	}
+	.toolbar{
+		width: auto;
+		min-height: 4em;
+		display: flex;
+		justify-content: space-between;
+		background-color: white;
+		margin: 1em;
+	}
+	.toolbar div {
+	}
+	.toolbar div div {
+
+	}
+	.toolbar input{
+		height: 47px;
+		width: 30vw;
+		font-size: 16px;
+		font-color: #3b3b3b;
+		background: #cde199;
+		margin: 0.6em;
+		border-width: 0px;
+	}
+
+	#delivery{
+		text-align: bottom;
+		font-size: 1.3em;
+		color: #487034;
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+
+	#cart{
+		width: 20%;
+		background-color: #14ab30;
+		color: white;
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 1em;
+	}
+
+	.sidebar{
+		margin-left: 1em;
+		height: 100%;
+		width: 16%;
+		background-color: white;
+	}
+	.sidebar{
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		padding: 10px;
+		vertical-align: top;
+	}
+	.sidebar ul{
+		list-style-type: none;
+		padding: 0px;
+	}
+	.sidebar ul a{
+		text-decoration: none;
+	}
+	.sidebar ul a:visited{
+		color: black;
+	}
+	.menuItem{
+		background-color: #eee;
+		padding: 8px;
+		margin: 1px;
+	}
+	.plate{
+		/*border: 1px black solid;*/
+		display: inline-flex;
+		flex-wrap: wrap;
+		width: 79%;
+		vertical-align: top;
+		background-color: #eee;
+	}
+	.plate article{
+		/*border: 1px black solid;*/
+		width: 12em;
+		height: 22em;
+		margin: 2px;
+		background-color: white;
+	}
+	.plate article img{
+		width: 100%;
+	}
+	.plate article h3,h4{
+		margin: 4px;
+	}
+	.amountOfGoods input{
+		width: 50%;
+		font-size: 2em;
+		background-color: #e7ebe1;
+		display: inline;
+		margin-left: 4px;
+		border-radius: 4px;
+	}
+	.amountOfGoods button{
+		width: 40%;
+		font-size: 2em;
+		display: inline;
+		border-radius: 4px;
+		background-color: #14ab30;
+	}
+	.ecoAlternative{
+		margin-top: 10px;
+	}
+	.ecoAlternative div{
+		display: inline;
+	}
+	.ecoAlternative button{
+		display: inline;
+		float: right;
+		vertical-align: top;
+		font-size: 1.5em;
+		margin-right: 10px;
+		margin-top: -15px;
+		background-color: orange;
+		border-radius: 4px;
+	}
+
+	.marginalPrice{
+		color: red;
+		font-size: 1.3em;
+	}
+
+
+	.push-in-menu{
+		float: right;
+		width: 20%;
+		height: 100%;
+		right: 0px;
+		top: 0px;
+		z-index: 1000;
+		overflow: auto;
+		position: fixed;
+		background-color: #eee;
+		border-left: 2px solid black;
+		padding-left: 5px;
+	}
+
+	.push-in-menu a {
+		display: block;
+		font-size: 1.1em;
+		font-weight: 300;
+	}
+	.container{
+		width: 80%;
+	}
+	
+	.infoPop{
+	}
+	
+	.infoBox{
+		position: absolute;
+	}
+
+	</style>
+</head>
+<body>
+	<nav class="push-in-menu" id="cbp-spmenu-s1">
+		<h3>Ekopanelen</h3>
+		<canvas id="myChart" width="400" height="400"></canvas>
+		<div class="infoPop" onmouseover="infoPopup(this, 'chart')" onmouseout="infoPopdown(this)">
+			<div class="infoBox">
+			i
+			</div>
+		</div>
+		<canvas id="testChart" width="400" height="400"></canvas>
+		<hr>
+	</nav>
+
+	<div class="container">
+		<div class="toolbar">
+			<div><input type="search" placeholder="Sök bland tusentals fräscha varor"></input></div>
+			<div id="delivery">Lediga leveranstider</div>
+			<div id="cart">
+				<div>Ange postnummer</div>
+				<div>Varukorgen är tom</div>
+			</div>
+		</div>
+		<div class="sidebar">
+			<ul>
+				<a href=""><li class="menuItem">Matkasse</li></a>
+				<a href=""><li class="menuItem">Köpbara recept</li></a>
+				<a href=""><li class="menuItem">Aktuella erbjudanden</li></a>
+			</ul>
+		</div>
+		<div class="plate" id="plate">
+			
+			
+			
+		
+			<!--<article>
+				<img src="https://res.cloudinary.com/coopsverige/image/upload/b_white,fl_progressive,q_90,c_lpad,g_center,h_222,w_222/v1480604477/177727.jpg">
+				<h4 class="productname">ÄGG 12-PACK KRAV</h4>
+				<h3 class="price">39:95</h3>
+				<div class="amountOfGoods">
+					<input type="number" value="1"></input>
+					<button type="button">Köp</button>
+				</div>
+				<div class="ecoAlternative">
+					<div>
+						<span>Köp eko!</span>
+						<br>
+						<span>Lägg till <span class="marginalPrice">3 kr</span></span>
+					</div>
+					<div><button type="button">Byt</button></div>
+				</div>
+			</article>-->
+		</div>
+	</div>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.canvasjs.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>-->
+	<script type="text/javascript" src="data.js"></script>
+	<script type="text/javascript">
+	window.onload = function () {
+
+		var plate = $("#plate");
+		products.forEach(function(p){
+			var article = $("<article>");
+			article.append($("<img>").attr("src", "https://res.cloudinary.com/coopsverige/image/upload/b_white,fl_progressive,q_90,c_lpad,g_center,h_222,w_222/v1480604477/177727.jpg"));
+			article.append($("<h4>").addClass("productname").text(p.eko ? p.name + " - eko" : p.name));
+			article.append($("<h3>").addClass("price").text(p.price));
+			var amountOfGoods = $("<div>").addClass("amountOfGoods");
+			amountOfGoods.append($("<input>").attr("type", "number").attr("value", "1"));
+			amountOfGoods.append($("<button>").attr("type", "button").text("Köp"));
+			article.append(amountOfGoods);
+			if(p.eko){
+				var ecoAlternative = $("<div>").addClass("ecoAlternative");
+				var text = $("<div>");
+				text.append($("<span>").text("Byta till Eko?"));
+				text.append($("<br>"));
+				text.append($("<span>").text("Lägg till ").append($("<span>").addClass("marginalPrice").text("0 kr")));
+				ecoAlternative.append(text);
+
+				ecoAlternative.append($("<div>").append($("<button>").attr("type", "button").text("Byt")));
+
+				article.append(ecoAlternative);
+			}
+			plate.append(article);
+		})
+
+		var value = 300;
+
+		var data = {
+		    labels: [
+		        "Ekologiskt",
+		        "Oekologiskt"
+		    ],
+		    datasets: [
+		        {
+		            data: [0, 0],
+		            backgroundColor: [
+		                "#14ab30",
+		                "#CECECE"
+		            ],
+		            hoverBackgroundColor: [
+		                "#14ab30",
+		                "#CECECE"
+		            ]
+		        }]
+		};
+		var ctx = document.getElementById("myChart");
+		var myPieChart = new Chart(ctx,{
+		    type: 'pie',
+		    data: data,
+		});
+		/*var context = document.getElementById('myChart').getContext('2d');
+		var myPieChart = new Chart(context).Pie(data);*/
+
+		function updatPieChart(eco, noneco){
+			console.log(value);
+			value = 200;
+			data.datasets[0].data = [eco, noneco];
+			console.log(data);
+			new Chart(ctx, {
+				type: 'pie',
+				data: data
+			})
+		}
+
+		updatPieChart(100, 20);
+		
+
+	}
+
+	</script>
+	
+	<script type="text/javascript">
+		// Gjorde nytt scriptblock då det över verkar vara broken någonstans
+		
+		// För infopopups
+		function infoPopup(target, ref) {
+			target.children.innerHTML = "Infotext " + ref + " not found!";
+		}
+		function infoPopdown(target) {
+			target.children.innerHTML = "i";
+		}
+		
+	</script>
+	
+</body>
+</html>
