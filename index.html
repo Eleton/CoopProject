@@ -160,10 +160,15 @@
 	}
 	
 	.infoPop{
+		max-width: 1em;
+		max-height: 1em;
+		display: inline;
+		background-color: beige;
+		position: absolute;
 	}
 	
 	.infoBox{
-		position: absolute;
+		display: inline;
 	}
 
 	#cheapProducts{
@@ -191,10 +196,11 @@
 		<h3>Ekopanelen</h3>
 		<canvas id="myChart" max-width="200px" height="200px"></canvas>
 		<hr>
-		<div class="infoPop" onmouseover="infoPopup(this, 'chart')" onmouseout="infoPopdown(this)">
-			<div class="infoBox">
-			i
-			</div>
+		<div class="infoPop" onmouseover="infoPopup(this, 'chart')" onmouseout="infoPopdown(this)">  
+			(i)
+		</div>
+		<div class="infoBox">  
+			(gdhjgdhjfghj)
 		</div>
 		<hr>
 		<div id="cheapProducts">
@@ -331,10 +337,10 @@
 		
 		// För infopopups
 		function infoPopup(target, ref) {
-			target.children.innerHTML = "Infotext " + ref + " not found!";
+			target.innerHTML = "Infotext " + ref + " not found!";
 		}
 		function infoPopdown(target) {
-			target.children.innerHTML = "i";
+			target.innerHTML = "(i)";
 		}
 		
 	</script>
