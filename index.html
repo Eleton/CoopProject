@@ -171,14 +171,17 @@
 <body>
 	<nav class="push-in-menu" id="cbp-spmenu-s1">
 		<h3>Ekopanelen</h3>
-		<canvas id="myChart" width="400" height="400"></canvas>
+		<canvas id="myChart" max-width="200px" height="200px"></canvas>
+		<hr>
 		<div class="infoPop" onmouseover="infoPopup(this, 'chart')" onmouseout="infoPopdown(this)">
 			<div class="infoBox">
 			i
 			</div>
 		</div>
+		<hr>
 		<canvas id="testChart" width="400" height="400"></canvas>
 		<hr>
+		
 	</nav>
 
 	<div class="container">
@@ -284,7 +287,7 @@
 		/*var context = document.getElementById('myChart').getContext('2d');
 		var myPieChart = new Chart(context).Pie(data);*/
 
-		function updatPieChart(eco, noneco){
+		function updatePieChart(eco, noneco){
 			console.log(value);
 			value = 200;
 			data.datasets[0].data = [eco, noneco];
@@ -295,7 +298,7 @@
 			})
 		}
 
-		updatPieChart(100, 20);
+		updatePieChart(100, 20);
 		
 
 	}
