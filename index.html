@@ -193,7 +193,6 @@
 		<hr>
 		<div class="infoPop" onmouseover="infoPopup(this, 'chart')" onmouseout="infoPopdown(this)">
 			<div class="infoBox">
-			i
 			</div>
 		</div>
 		<hr>
@@ -203,6 +202,7 @@
 			<div><strong>Kaffe </strong> <span class="cheapPrice">60:-</span></div>
 			<div><strong>Honungsbalsam </strong> <span class="cheapPrice">20:-</span></div>
 		</div>
+		<hr>
 	</nav>
 
 	<div class="container">
@@ -255,15 +255,26 @@
 	<script type="text/javascript">
 	window.onload = function () {
 
+		var shoppingCart = [];
+
 		var plate = $("#plate");
 		products.forEach(function(p){
-			var article = $("<article>");
+			var article = $("<article>").attr("id", p.id);
 			article.append($("<img>").attr("src", "https://res.cloudinary.com/coopsverige/image/upload/b_white,fl_progressive,q_90,c_lpad,g_center,h_222,w_222/v1480604477/177727.jpg"));
 			article.append($("<h4>").addClass("productname").text(p.eko ? p.name + " - eko" : p.name));
 			article.append($("<h3>").addClass("price").text(p.price));
 			var amountOfGoods = $("<div>").addClass("amountOfGoods");
-			amountOfGoods.append($("<input>").attr("type", "number").attr("value", "1"));
-			amountOfGoods.append($("<button>").attr("type", "button").text("Köp"));
+			var numberOfArticles = $("<input>").attr("type", "number").attr("value", "1");
+			var buyButton = $("<button>").attr("type", "button").text("Köp");
+			amountOfGoods.append(numberOfArticles);
+			amountOfGoods.append(buyButton);
+			buyButton.on("click", function(){
+				var n = parseInt(numberOfArticles.val());
+				for(var i = 0; i < n; i++){
+					shoppingCart.push(products[parseInt(article.attr("id"))-1]);
+				}
+				updatePieChart();
+			})
 			article.append(amountOfGoods);
 			if(p.eko){
 				var ecoAlternative = $("<div>").addClass("ecoAlternative");
@@ -284,8 +295,8 @@
 
 		var data = {
 		    labels: [
-		        "Ekologiskt",
-		        "Oekologiskt"
+		        "Eko",
+		        "Ej Eko"
 		    ],
 		    datasets: [
 		        {
@@ -305,12 +316,13 @@
 		    type: 'pie',
 		    data: data,
 		});
-		/*var context = document.getElementById('myChart').getContext('2d');
-		var myPieChart = new Chart(context).Pie(data);*/
 
-		function updatePieChart(eco, noneco){
-			console.log(value);
-			value = 200;
+		function updatePieChart(){
+			var eco = 0;
+			var noneco = 0;
+			shoppingCart.forEach(function(d){
+				d.eko ? eco += d.price : noneco += d.price;
+			})
 			data.datasets[0].data = [eco, noneco];
 			console.log(data);
 			new Chart(ctx, {
@@ -318,9 +330,6 @@
 				data: data
 			})
 		}
-
-		updatePieChart(100, 20);
-		
 
 	}
 
