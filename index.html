@@ -155,6 +155,22 @@
 		font-size: 1.1em;
 		font-weight: 300;
 	}
+
+	#priceLabels{
+		display: flex;
+		justify-content: center;
+		font-size: 1.6em;
+	}
+	#ecoTag{
+		color: #14ab30;
+	}
+	#nonEcoTag{
+		margin-left: 1em;
+	}
+	#ecoTag, #nonEcoTag{
+
+	}
+
 	.container{
 		width: 80%;
 	}
@@ -195,6 +211,7 @@
 	<nav class="push-in-menu" id="cbp-spmenu-s1">
 		<h3>Ekopanelen</h3>
 		<canvas id="myChart" max-width="200px" height="200px"></canvas>
+		<div id="priceLabels"><span id="ecoTag">0</span>:- <span id="nonEcoTag">0</span>:- </div>
 		<hr>
 		<div class="infoPop" onmouseover="infoPopup(this, 'chart')" onmouseout="infoPopdown(this)">  
 			(i)
@@ -299,10 +316,17 @@
 		            ]
 		        }]
 		};
+		var options = {
+			rotation: 0.5*Math.PI,
+			legend: {
+				onClick: null
+			}
+		}
 		var ctx = document.getElementById("myChart");
 		var myPieChart = new Chart(ctx,{
 		    type: 'pie',
 		    data: data,
+		    options: options,
 		});
 
 		function updatePieChart(){
@@ -312,11 +336,13 @@
 				d.eko ? eco += d.price : noneco += d.price;
 			})
 			data.datasets[0].data = [eco, noneco];
-			console.log(data);
 			new Chart(ctx, {
 				type: 'pie',
-				data: data
+				data: data,
+				options: options,
 			})
+			$("#ecoTag").text(eco);
+			$("#nonEcoTag").text(noneco);
 		}
 
 	}
