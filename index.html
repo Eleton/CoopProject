@@ -98,7 +98,7 @@
 	.plate article h3,h4{
 		margin: 4px;
 	}
-	.plate .active{
+	.plate article:hover{
 		border: 1px solid rgba(0,0,0,0.5);
 		margin: 1px;
 	}
@@ -183,6 +183,8 @@
 		max-width: 1.25em;
 		max-height: 1.25em;
 		display: inline;
+		border: 2px black solid;
+		border-radius: 100%;
 	}
 	#infoBox{
 		background-color: beige;
@@ -213,6 +215,12 @@
 		float: right;
 	}
 
+	.infoPopContainer{
+		display: flex;
+		justify-content: flex-end;
+		padding-right: 1em;
+	}
+
 	</style>
 </head>
 <body>
@@ -221,11 +229,16 @@
 	</div>
 	<nav class="push-in-menu" id="cbp-spmenu-s1">
 		<h3>Ekopanelen</h3>
-		<img class="infoPop" src="infopop.png" onmouseover="infoPopup(2)" onmouseout="infoPopdown()"/>
+		<div class="infoPopContainer">
+			<img class="infoPop" src="infopop.png" onmouseover="infoPopup(2)" onmouseout="infoPopdown()"/>
+		</div>
 		<hr>
 		<canvas id="myChart" max-width="200px" height="200px"></canvas>
 		<div id="priceLabels"><span id="ecoTag">0</span>:- <span id="nonEcoTag">0</span>:- </div>
-		<img class="infoPop" src="infopop.png" onmouseover="infoPopup(0)" onmouseout="infoPopdown()"/>
+		<div class="infoPopContainer">
+			<img class="infoPop" src="infopop.png" onmouseover="infoPopup(0)" onmouseout="infoPopdown()"/>
+		</div>
+		
 		<hr>
 		<div id="cheapProducts">
 			<h3>Veckans eko-tips!</h3>
@@ -233,7 +246,9 @@
 			<div><strong>Kaffe </strong> <span class="cheapPrice">60:-</span></div>
 			<div><strong>Honungsbalsam </strong> <span class="cheapPrice">20:-</span></div>
 		</div>
-		<img class="infoPop" src="infopop.png" onmouseover="infoPopup(1)" onmouseout="infoPopdown()"/>
+		<div class="infoPopContainer">
+			<img class="infoPop" src="infopop.png" onmouseover="infoPopup(1)" onmouseout="infoPopdown()"/>
+		</div>
 		<hr>
 		<div id="selectedProduct">
 			<h3>Vara</h3>
@@ -363,9 +378,9 @@
 
 	var selectedProduct = {};
 
-	$(".plate").on("mouseenter mouseleave", ".article", function(e){
+	/*$(".plate").on("mouseenter mouseleave", ".article", function(e){
 		$(this).toggleClass("active");
-	});
+	});*/
 	$(".plate").on("click", ".article", function(e){
 		selectedProduct = products[parseInt($(this).attr("id"))-1];
 		console.log(selectedProduct);
