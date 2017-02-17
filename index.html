@@ -114,7 +114,7 @@
 		font-size: 2em;
 		display: inline;
 		border-radius: 4px;
-		background-color: #14ab30;
+		background-color: orange;
 	}
 	.ecoAlternative{
 		margin-top: 10px;
@@ -129,7 +129,7 @@
 		font-size: 1.5em;
 		margin-right: 10px;
 		margin-top: -15px;
-		background-color: orange;
+		background-color: #14ab30;
 		border-radius: 4px;
 	}
 
@@ -343,10 +343,10 @@
 				var text = $("<div>");
 				text.append($("<span>").text("Köp eko istället?"));
 				text.append($("<br>"));
-				text.append($("<span>").text("Bara ").append($("<span>").addClass("marginalPrice").text((products.filter(function(d){return (d.name === p.name && d.eko)})[0].price - p.price))).append(" extra"));
+				text.append($("<span>").text("Bara ").append($("<span>").addClass("marginalPrice").text((products.filter(function(d){return (d.name === p.name && d.eko)})[0].price - p.price))).append(":- extra"));
 				ecoAlternative.append(text);
 
-				var changeButton = $("<button>").attr("type", "button").text("Ja").addClass("changeButton");
+				var changeButton = $("<button>").attr("type", "button").text("KÖP").addClass("changeButton");
 				changeButton.on("click", function(){
 					var fil = products.filter(function(d){
 						return (d.name === p.name && d.eko);
