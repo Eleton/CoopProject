@@ -180,15 +180,19 @@
 	}
 	
 	.infoPop{
-		max-width: 1em;
-		max-height: 1em;
+		max-width: 1.25em;
+		max-height: 1.25em;
 		display: inline;
-		background-color: beige;
-		position: absolute;
 	}
-	
-	.infoBox{
-		display: inline;
+	#infoBox{
+		background-color: beige;
+		display: none;
+		position: fixed;
+		right: 22%;
+		top: 40%;
+		width: 12em;
+		max-width: 12em;
+		border: 2px solid black;
 	}
 
 	#cheapProducts{
@@ -212,16 +216,16 @@
 	</style>
 </head>
 <body>
+	<!-- Floating infobox for mouse-over tooltips -->
+	<div id="infoBox">  
+	</div>
 	<nav class="push-in-menu" id="cbp-spmenu-s1">
 		<h3>Ekopanelen</h3>
-		<canvas id="myChart" max-width="200px" height="200px"></canvas>
-		<div id="priceLabels"><span id="ecoTag"></span> <span id="nonEcoTag"></span> </div>
+		<img class="infoPop" src="infopop.png" onmouseover="infoPopup(2)" onmouseout="infoPopdown()"/>
 		<hr>
-		<div class="infoPop" onmouseover="infoPopup(this, 'chart')" onmouseout="infoPopdown(this)">  
-			(i)
-		</div>
-		<div class="infoBox">  
-		</div>
+		<canvas id="myChart" max-width="200px" height="200px"></canvas>
+		<div id="priceLabels"><span id="ecoTag">0</span>:- <span id="nonEcoTag">0</span>:- </div>
+		<img class="infoPop" src="infopop.png" onmouseover="infoPopup(0)" onmouseout="infoPopdown()"/>
 		<hr>
 		<div id="cheapProducts">
 			<h3>Veckans eko-tips!</h3>
@@ -229,6 +233,7 @@
 			<div><strong>Kaffe </strong> <span class="cheapPrice">60:-</span></div>
 			<div><strong>Honungsbalsam </strong> <span class="cheapPrice">20:-</span></div>
 		</div>
+		<img class="infoPop" src="infopop.png" onmouseover="infoPopup(1)" onmouseout="infoPopdown()"/>
 		<hr>
 		<div id="selectedProduct">
 			<h3>Vara</h3>
@@ -265,6 +270,7 @@
 	<script type="text/javascript" src="jquery.canvasjs.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
 	<script type="text/javascript" src="data.js"></script>
+	<script type="text/javascript" src="infotexts.js"></script>
 	<script type="text/javascript">
 	window.onload = function () {
 
@@ -374,11 +380,13 @@
 		// Gjorde nytt scriptblock då det över verkar vara broken någonstans
 		
 		// För infopopups
-		function infoPopup(target, ref) {
-			target.innerHTML = "Infotext " + ref + " not found!";
+		function infoPopup(textId) {
+			document.getElementById("infoBox").style.display = "block";
+			document.getElementById("infoBox").innerHTML = infotexts[textId];
 		}
-		function infoPopdown(target) {
-			target.innerHTML = "(i)";
+		function infoPopdown() {
+			document.getElementById("infoBox").style.display = "none";
+			document.getElementById("infoBox").innerHTML = "";
 		}
 		
 	</script>
