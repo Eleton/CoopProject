@@ -98,6 +98,10 @@
 	.plate article h3,h4{
 		margin: 4px;
 	}
+	.plate .active{
+		border: 1px solid rgba(0,0,0,0.5);
+		margin: 1px;
+	}
 	.amountOfGoods input{
 		width: 50%;
 		font-size: 2em;
@@ -211,7 +215,7 @@
 	<nav class="push-in-menu" id="cbp-spmenu-s1">
 		<h3>Ekopanelen</h3>
 		<canvas id="myChart" max-width="200px" height="200px"></canvas>
-		<div id="priceLabels"><span id="ecoTag">0</span>:- <span id="nonEcoTag">0</span>:- </div>
+		<div id="priceLabels"><span id="ecoTag"></span> <span id="nonEcoTag"></span> </div>
 		<hr>
 		<div class="infoPop" onmouseover="infoPopup(this, 'chart')" onmouseout="infoPopdown(this)">  
 			(i)
@@ -226,6 +230,10 @@
 			<div><strong>Honungsbalsam </strong> <span class="cheapPrice">20:-</span></div>
 		</div>
 		<hr>
+		<div id="selectedProduct">
+			<h3>Vara</h3>
+			<p>Info</p>
+		</div>
 	</nav>
 
 	<div class="container">
@@ -264,7 +272,7 @@
 
 		var plate = $("#plate");
 		products.forEach(function(p){
-			var article = $("<article>").attr("id", p.id);
+			var article = $("<article>").attr("id", p.id).addClass("article");
 			article.append($("<img>").attr("src", "https://res.cloudinary.com/coopsverige/image/upload/b_white,fl_progressive,q_90,c_lpad,g_center,h_222,w_222/v1480604477/177727.jpg"));
 			article.append($("<h4>").addClass("productname").text(p.eko ? p.name + " - eko" : p.name));
 			article.append($("<h3>").addClass("price").text(p.price));
@@ -341,11 +349,24 @@
 				data: data,
 				options: options,
 			})
-			$("#ecoTag").text(eco);
-			$("#nonEcoTag").text(noneco);
+			$("#ecoTag").text(eco + ":-");
+			$("#nonEcoTag").text(noneco + ":-");
 		}
 
 	}
+
+	var selectedProduct = {};
+
+	$(".plate").on("mouseenter mouseleave", ".article", function(e){
+		$(this).toggleClass("active");
+	});
+	$(".plate").on("click", ".article", function(e){
+		selectedProduct = products[parseInt($(this).attr("id"))-1];
+		console.log(selectedProduct);
+		var infoOnSelectedProduct = $("#selectedProduct");
+		$("#selectedProduct h3").text(selectedProduct.name);
+		$("#selectedProduct p").text(selectedProduct.info);
+	});
 
 	</script>
 	
