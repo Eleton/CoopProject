@@ -185,6 +185,9 @@
 		border: 2px black solid;
 		border-radius: 100%;
 	}
+	.infoPop:hover{
+		border-color: grey;
+	}
 	#infoBox{
 		background-color: beige;
 		display: none;
@@ -241,7 +244,7 @@
 		</div>
 		<hr>
 		<canvas id="myChart" max-width="200px" height="200px"></canvas>
-		<div id="priceLabels"><span id="ecoTag">0</span>:- <span id="nonEcoTag">0</span>:- </div>
+		<div id="priceLabels"><span id="ecoTag"></span> <span id="nonEcoTag"></span> </div>
 		<div class="infoPopContainer">
 			<img class="infoPop" src="infopop.png" onmouseover="infoPopup(0)" onmouseout="infoPopdown()"/>
 		</div>
@@ -296,9 +299,8 @@
 	<script type="text/javascript" src="infotexts.js"></script>
 	<script type="text/javascript" src="tiptexts.js"></script>
 	<script type="text/javascript">
+	var shoppingCart = [];
 	window.onload = function () {
-
-		var shoppingCart = [];
 
 		var plate = $("#plate");
 		products.forEach(function(p){
@@ -308,7 +310,7 @@
 			article.append($("<h3>").addClass("price").text(p.price));
 			var amountOfGoods = $("<div>").addClass("amountOfGoods");
 			var numberOfArticles = $("<input>").attr("type", "number").attr("value", "1");
-			var buyButton = $("<button>").attr("type", "button").text("Köp");
+			var buyButton = $("<button>").attr("type", "button").addClass("buyButton").text("Köp");
 			amountOfGoods.append(numberOfArticles);
 			amountOfGoods.append(buyButton);
 			buyButton.on("click", function(){
@@ -319,15 +321,26 @@
 				updatePieChart();
 			})
 			article.append(amountOfGoods);
-			if(p.eko){
+			if(!p.eko){
 				var ecoAlternative = $("<div>").addClass("ecoAlternative");
 				var text = $("<div>");
-				text.append($("<span>").text("Byta till Eko?"));
+				text.append($("<span>").text("Köp eko istället?"));
 				text.append($("<br>"));
-				text.append($("<span>").text("Lägg till ").append($("<span>").addClass("marginalPrice").text("0 kr")));
+				text.append($("<span>").text("Bara ").append($("<span>").addClass("marginalPrice").text((products.filter(function(d){return (d.name === p.name && d.eko)})[0].price - p.price))).append(" extra"));
 				ecoAlternative.append(text);
 
-				ecoAlternative.append($("<div>").append($("<button>").attr("type", "button").text("Byt")));
+				var changeButton = $("<button>").attr("type", "button").text("Ja").addClass("changeButton");
+				changeButton.on("click", function(){
+					var fil = products.filter(function(d){
+						return (d.name === p.name && d.eko);
+					})[0];
+					var n = parseInt(numberOfArticles.val());
+					for(var i = 0; i < n; i++){
+						shoppingCart.push(fil);
+					}
+					updatePieChart();
+				})
+				ecoAlternative.append($("<div>").append(changeButton));
 
 				article.append(ecoAlternative);
 			}
@@ -387,12 +400,11 @@
 
 	var selectedProduct = {};
 
-	/*$(".plate").on("mouseenter mouseleave", ".article", function(e){
+	$(".plate").on("mouseenter mouseleave", ".article", function(e){
 		$(this).toggleClass("active");
-	});*/
+	});
 	$(".plate").on("click", ".article", function(e){
 		selectedProduct = products[parseInt($(this).attr("id"))-1];
-		console.log(selectedProduct);
 		var infoOnSelectedProduct = $("#selectedProduct");
 		$("#selectedProduct h3").text(selectedProduct.name);
 		$("#selectedProduct p").text(selectedProduct.info);
