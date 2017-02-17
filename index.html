@@ -91,7 +91,8 @@
 		background-color: white;
 	}
 	.plate article img{
-		width: 100%;
+		width: 80%;
+		padding: 10%;
 	}
 	.plate article h3,h4{
 		margin: 4px;
@@ -321,7 +322,7 @@
 		var plate = $("#plate");
 		products.forEach(function(p){
 			var article = $("<article>").attr("id", p.id).addClass("article");
-			article.append($("<img>").attr("src", "https://res.cloudinary.com/coopsverige/image/upload/b_white,fl_progressive,q_90,c_lpad,g_center,h_222,w_222/v1480604477/177727.jpg"));
+			article.append($("<img>").attr("src", p.imgurl));
 			article.append($("<h4>").addClass("productname").text(p.eko ? p.name + " - eko" : p.name));
 			article.append($("<h3>").addClass("price").text(p.price));
 			var amountOfGoods = $("<div>").addClass("amountOfGoods");
