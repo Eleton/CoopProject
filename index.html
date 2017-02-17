@@ -152,6 +152,21 @@
 		border-left: 2px solid black;
 		padding-left: 5px;
 	}
+	
+	#menuInButton {
+		position: absolute;
+		top: 47%;
+		left: 0%;
+		height: 1em;
+	}
+	
+	#menuOutButton {
+		display: none;
+		position: fixed;
+		top: 47%;
+		right: 0%;
+		height: 4em;
+	}
 
 	.push-in-menu a {
 		display: block;
@@ -235,9 +250,10 @@
 </head>
 <body>
 	<!-- Floating infobox for mouse-over tooltips -->
-	<div id="infoBox">  
-	</div>
-	<nav class="push-in-menu" id="cbp-spmenu-s1">
+	<div id="infoBox"></div>
+	<img id="menuOutButton" src="arrowOut.png" onclick="showPanel()"/>
+	<nav class="push-in-menu" id="cbp-spmenu-s1" onmouseover="test()">
+		<img id="menuInButton" src="arrowIn.png" onclick="hidePanel()"/>
 		<h3>Ekopanelen</h3>
 		<div class="infoPopContainer">
 			<img class="infoPop" src="infopop.png" onmouseover="infoPopup(2)" onmouseout="infoPopdown()"/>
@@ -423,6 +439,17 @@
 		function infoPopdown() {
 			document.getElementById("infoBox").style.display = "none";
 			document.getElementById("infoBox").innerHTML = "";
+		}
+		
+		function hidePanel() {
+			document.getElementById("cbp-spmenu-s1").style.display = "none";
+			document.getElementById("menuOutButton").style.display = "inline";
+			document.getElementById("plate").style.width = "82%";
+		}
+		function showPanel() {
+			document.getElementById("cbp-spmenu-s1").style.display = "block";
+			document.getElementById("menuOutButton").style.display = "none";
+			document.getElementById("plate").style.width = "79%";
 		}
 		
 	</script>
