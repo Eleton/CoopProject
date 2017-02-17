@@ -78,7 +78,6 @@
 		margin: 1px;
 	}
 	.plate{
-		/*border: 1px black solid;*/
 		display: inline-flex;
 		flex-wrap: wrap;
 		width: 79%;
@@ -86,7 +85,6 @@
 		background-color: #eee;
 	}
 	.plate article{
-		/*border: 1px black solid;*/
 		width: 12em;
 		height: 22em;
 		margin: 2px;
@@ -444,12 +442,12 @@
 		function hidePanel() {
 			document.getElementById("cbp-spmenu-s1").style.display = "none";
 			document.getElementById("menuOutButton").style.display = "inline";
-			document.getElementById("plate").style.width = "82%";
+			$(".container").css("width", "99%");
 		}
 		function showPanel() {
 			document.getElementById("cbp-spmenu-s1").style.display = "block";
 			document.getElementById("menuOutButton").style.display = "none";
-			document.getElementById("plate").style.width = "79%";
+			$(".container").css("width", "79%");
 		}
 		
 	</script>
