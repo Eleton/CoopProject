@@ -43,6 +43,10 @@ body{
 		justify-content: space-between;
 		padding: 1em;
 	}
+	
+	#cart:hover{
+		background-color: #118422
+	}
 
 	.sidebar{
 		margin-left: 1em;
@@ -96,6 +100,16 @@ body{
 		border: 1px solid rgba(0,0,0,0.5);
 		margin: 1px;
 	}
+	
+	.kassa{
+		display: none;
+		flex-wrap: wrap;
+		width: 79%;
+		vertical-align: top;
+		background-color: #eee;
+	}
+	
+	
 	.amountOfGoods input{
 		width: 50%;
 		font-size: 2em;
@@ -198,6 +212,18 @@ body{
 		border-color: grey;
 	}
 	#infoBox{
+		background-color: beige;
+		display: none;
+		position: fixed;
+		right: 20.5%;
+		top: 40%;
+		width: 12em;
+		max-width: 12em;
+		border: 2px solid black;
+		padding: 3px;
+	}
+	
+	#initialPopul{ 
 		background-color: beige;
 		display: none;
 		position: fixed;

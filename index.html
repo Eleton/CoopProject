@@ -45,9 +45,8 @@
 		<div class="toolbar">
 			<div><input type="search" placeholder="Sök bland tusentals fräscha varor"></input></div>
 			<div id="delivery">Lediga leveranstider</div>
-			<div id="cart">
-				<div>Ange postnummer</div>
-				<div>Varukorgen är tom</div>
+			<div id="cart" onclick="HidePlate()">
+				Varukorgen är tom
 			</div>
 		</div>
 		<div class="sidebar">
@@ -62,6 +61,11 @@
 			
 			
 		
+		</div>
+		<div class="kassa" id="kassa">
+			EJ FÄRDIGSTÄLLD! <br/> <br/>
+			Här i kassavyn ska det finnas mer detaljerade diagram kring ditt inköp, procent ekologiskt per kategori osv. <br/>
+			Det kommer även vara möjligt att uppgradera varor till ekologiskt direkt från listan av dina inköp. 
 		</div>
 	</div>
 
@@ -92,6 +96,7 @@
 					shoppingCart.push(products[parseInt(article.attr("id"))-1]);
 				}
 				updatePieChart();
+				updateCart();
 			})
 			article.append(amountOfGoods);
 			if(!p.eko){
@@ -112,6 +117,7 @@
 						shoppingCart.push(fil);
 					}
 					updatePieChart();
+					updateCart();
 				})
 				ecoAlternative.append($("<div>").append(changeButton));
 
@@ -168,7 +174,7 @@
 			$("#ecoTag").text(eco + ":-");
 			$("#nonEcoTag").text(noneco + ":-");
 		}
-
+		
 	}
 
 	var selectedProduct = {};
@@ -182,11 +188,6 @@
 		$("#selectedProduct h3").text(selectedProduct.name);
 		$("#selectedProduct p").text(selectedProduct.info);
 	});
-
-	</script>
-	
-	<script type="text/javascript">
-		// Gjorde nytt scriptblock då det över verkar vara broken någonstans
 		
 		// För infopopups
 		function infoPopup(textId) {
@@ -202,11 +203,39 @@
 			document.getElementById("cbp-spmenu-s1").style.display = "none";
 			document.getElementById("menuOutButton").style.display = "inline";
 			$(".container").css("width", "99%");
+			hidePlate();
 		}
 		function showPanel() {
 			document.getElementById("cbp-spmenu-s1").style.display = "block";
 			document.getElementById("menuOutButton").style.display = "none";
 			$(".container").css("width", "79%");
+			showPlate();
+		}
+		
+		function HidePlate() {
+			document.getElementById("plate").style.display = "none";
+			document.getElementById("kassa").style.display = "inline-flex";
+			document.getElementById("cart").onclick = function() {ShowPlate()};
+		}
+		function ShowPlate() {
+			document.getElementById("plate").style.display = "inline-flex";
+			document.getElementById("kassa").style.display = "none"
+			document.getElementById("cart").onclick = function() {HidePlate()};
+		}
+		
+		function updateCart() {
+			var totalPrice = 0;
+			var numItems = 0;
+			shoppingCart.forEach(function(d){
+				totalPrice += d.price;
+				numItems += 1;
+			})
+			document.getElementById("cart").innerHTML = "Varukorg (" + numItems + ") " + totalPrice + ":- <br/>Gå till kassa"; //TODO: Fixa snygg knapp
+		}
+		
+		function PopulateCheckout()
+		{
+		
 		}
 		
 	</script>
