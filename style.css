@@ -101,14 +101,6 @@ body{
 		margin: 1px;
 	}
 	
-	.kassa{
-		display: none;
-		flex-wrap: wrap;
-		width: 79%;
-		vertical-align: top;
-		background-color: #eee;
-	}
-	
 	
 	.amountOfGoods input{
 		width: 50%;
@@ -266,4 +258,42 @@ body{
 		display: flex;
 		justify-content: flex-end;
 		padding-right: 1em;
+	}
+	
+	.kassa{
+		display: none;
+		flex-wrap: wrap;
+		width: 79%;
+		vertical-align: top;
+		background-color: #eee;
+	}
+	
+	.kassa .article .col{
+		width: 15%;
+		display: inline-flex;
+		#flex-direction: column;
+		#justify-content: flex-end;
+	}
+	
+	.kassa .article{
+		width: 99%;
+		#height: 7em;
+		margin: 2px;
+		padding: 1px;
+		background-color: white;
+		display: inline-flex;
+		#flex-direction: column;
+		#justify-content: flex-end;
+	}
+	.kassa .article .col img{
+		width: 4em;
+		height: 4em;
+		padding: 1%;
+	}
+	.kassa article h3,h4{
+		margin: 4px;
+	}
+	.kassa article:hover{
+		border: 1px solid rgba(0,0,0,0.5);
+		margin: 1px;
 	}

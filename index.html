@@ -63,9 +63,6 @@
 		
 		</div>
 		<div class="kassa" id="kassa">
-			EJ FÄRDIGSTÄLLD! <br/> <br/>
-			Här i kassavyn ska det finnas mer detaljerade diagram kring ditt inköp, procent ekologiskt per kategori osv. <br/>
-			Det kommer även vara möjligt att uppgradera varor till ekologiskt direkt från listan av dina inköp. 
 		</div>
 	</div>
 
@@ -216,6 +213,7 @@
 			document.getElementById("plate").style.display = "none";
 			document.getElementById("kassa").style.display = "inline-flex";
 			document.getElementById("cart").onclick = function() {ShowPlate()};
+			PopulateCheckout();
 		}
 		function ShowPlate() {
 			document.getElementById("plate").style.display = "inline-flex";
@@ -230,12 +228,38 @@
 				totalPrice += d.price;
 				numItems += 1;
 			})
-			document.getElementById("cart").innerHTML = "Varukorg (" + numItems + ") " + totalPrice + ":- <br/>Gå till kassa"; //TODO: Fixa snygg knapp
+			document.getElementById("cart").innerHTML = "Varukorg (" + numItems + ") " + totalPrice.toFixed(2) + ":- <br/>Gå till kassa"; //TODO: Fixa snygg knapp
 		}
 		
-		function PopulateCheckout()
-		{
-		
+		function PopulateCheckout(){
+			var output = "";
+			var eachProduct = [];
+			var priceTotal;
+			var numTotal;
+			
+			
+			products.forEach(function(p){
+				priceTotal = 0;
+				numTotal = 0;
+				eachProduct = shoppingCart.filter(function(d){
+					return (d.id === p.id);
+				});
+				eachProduct.forEach(function(d){
+					numTotal++;
+					priceTotal += d.price;
+				});
+				if (numTotal > 0) {
+					output += '<div class="article">';
+					
+					output += '<div class="col">' + '<img src="' + eachProduct[0].imgurl + '"></img></div>'
+					output += '<div class="col">' + (eachProduct[0].eko ? eachProduct[0].name + " - eko" : eachProduct[0].name) + "</div>"; 
+					output += '<div class="col">' + numTotal + " st </div>";
+					output += '<div class="col">' + priceTotal.toFixed(2) + ":- </div>";
+					output += "</div><br/>";
+				}
+			})
+			
+			document.getElementById("kassa").innerHTML = output;
 		}
 		
 	</script>
