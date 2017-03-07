@@ -85,6 +85,7 @@
 			var amountOfGoods = $("<div>").addClass("amountOfGoods");
 			var numberOfArticles = $("<input>").attr("type", "number").attr("value", "1");
 			var buyButton = $("<button>").attr("type", "button").addClass("buyButton").text("Köp");
+			if(p.eko) buyButton.addClass("ecoButton");
 			amountOfGoods.append(numberOfArticles);
 			amountOfGoods.append(buyButton);
 			buyButton.on("click", function(){
