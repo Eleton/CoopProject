@@ -256,6 +256,7 @@
 					output += '<div class="col">' + (eachProduct[0].eko ? eachProduct[0].name + " - eko" : eachProduct[0].name) + "</div>"; 
 					output += '<div class="col">' + numTotal + " st </div>";
 					output += '<div class="col">' + priceTotal.toFixed(2) + ":- </div>";
+					output += '<div class="col">' + (!eachProduct[0].eko ? "<button> Byt till eko </button>" : "") + "</div>";
 					output += "</div><br/>";
 				}
 			})

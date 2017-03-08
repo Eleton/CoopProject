@@ -290,6 +290,16 @@ body{
 		height: 4em;
 		padding: 1%;
 	}
+	.kassa .article .col button{
+		width: 8em;
+		height: 4em;
+		margin-top: 0.5em;
+		#padding: 10%;
+		background-color: #14ab30;
+		border-radius: 4px;
+		#font-size: 1.5em;
+		border-radius: 4px;
+	}
 	.kassa article h3,h4{
 		margin: 4px;
 	}
